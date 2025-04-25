@@ -12,6 +12,20 @@ let tick = document.querySelectorAll(".task-done");
 let del = document.querySelectorAll(".delete-task");
 let i = 1;
 
+// GPT CODE
+// function saveTasksToLocalStorage() {
+//     const tasks = [];
+//     document.querySelectorAll(".task").forEach(task => {
+//         tasks.push({
+//             title: task.querySelector(".ttc-heading").textContent,
+//             desc: task.querySelector(".ttc-desc").textContent,
+//             isFinished: task.classList.contains("finish")
+//         });
+//     });
+//     localStorage.setItem("tasks", JSON.stringify(tasks));
+// }
+
+
 // title.addEventListener("click", () => {
 
 //     const sound = new Audio('/Assets/test.mp3');
@@ -110,11 +124,15 @@ addTask.addEventListener("click", () => {
         i++;
 
 
+        // saveTasksToLocalStorage();
     }
+
 
 })
 
-const micBtn = document.querySelector('.mic-btn');
+
+function mic(){
+    const micBtn = document.querySelector('.mic-btn');
 const taskTitleInput = document.getElementById('task-title');
 const taskDescInput = document.getElementById('task-desc');
 
@@ -169,7 +187,9 @@ if (!SpeechRecognition) {
   };
 }
 
+}
 
+mic();
 // Popup for delete
 
 function popup() {
@@ -190,6 +210,7 @@ function popup() {
             // alert("task done");
             const tElem = e.target.closest(".task");
 
+
             if (tElem) {
                 tElem.classList.add("finish");
                 finishedTasks.appendChild(tElem);
@@ -207,7 +228,7 @@ function popup() {
                     taskAction.classList.add("finish-action");
                     taskAction.classList.remove("task-action");
                 }
-
+                // saveTasksToLocalStorage();
             }
         }
 
@@ -236,7 +257,10 @@ function popup() {
     yesBtn.addEventListener("click", () => {
         if (taskToDelete) {
             taskToDelete.remove();
+            // saveTasksToLocalStorage(); //task save
             taskToDelete = null;
+
+            
         }
         delPop.style.display = "none";
     });
@@ -249,6 +273,45 @@ function popup() {
 
 popup();
 
+
+// GPT CODE
+// function loadTasksFromLocalStorage() {
+//     const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+//     savedTasks.forEach((taskObj, index) => {
+//         let task = document.createElement("div");
+//         task.className = "task";
+//         task.id = `task-${index + 1}`;
+
+//         if (taskObj.isFinished) {
+//             task.classList.add("finish");
+//         }
+
+//         task.innerHTML = `
+//         <div class="task-text">
+//             <h3 class="ttc-heading">${taskObj.title}</h3>
+//             <p class="ttc-desc">${taskObj.desc}</p>
+//         </div>
+//         <div class="${taskObj.isFinished ? 'finish-action' : 'task-action'}">
+//             ${taskObj.isFinished ? '' : `
+//             <button type="button" class="task-done"><i class="ri-check-line"></i></button>`}
+//             <button type="button" class="delete-task bin-button">
+//                 <!-- your bin SVGs go here -->
+//                 🗑️
+//             </button>
+//         </div>
+//         `;
+
+//         if (taskObj.isFinished) {
+//             finishedTasks.appendChild(task);
+//         } else {
+//             taskToComplete.appendChild(task);
+//         }
+//     });
+
+//     i = savedTasks.length + 1;
+// }
+
+// loadTasksFromLocalStorage();
 
 
 
