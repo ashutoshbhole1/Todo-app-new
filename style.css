@@ -208,6 +208,49 @@ textarea:focus {
   color: blueviolet;
 }
 
+.add_mic_btn{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: max-content;
+  /* background-color: #009d1a; */
+  margin-top: 1.2rem;
+  gap: 1rem;
+
+}
+
+.mic-btn {
+  height: 3rem;
+  width: 3rem;
+  background: #ffffffe7 ;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #9000ff;
+  font-size: 1.1rem;
+  border: 1px solid #a200ff;
+}
+
+.mic-btn:hover{
+  background: #ffffffdb ;
+  color: #8304ae;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* -------------------- Tasks Section ----------------  */
 
@@ -444,13 +487,69 @@ textarea:focus {
 
 }
 
+.finish .task-action {
+  justify-content: right;
+  margin-right: .6rem;
+}
+
+
+.task:not(.finish) .finish-action{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  min-width: 16%;
+  height: 100%;
+}
+
+.task .finish-action .task-done{
+  border: 1px solid green;
+
+  background: #d9ffca;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  color: rgb(0, 130, 0);
+  transition: .3s all ease-in-out;
+}
+
+.finish-action .task-done:hover{
+  background: #009d1a;
+  color: rgb(255, 255, 255);
+  font-size: 1.4rem;
+  box-shadow: 0 0 12px rgba(0, 255, 0, 0.785);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* delete popup  and popup*/
-.delete-popup-bg{
-  
-    /* display: flex; */
-    display: none;
-  
+.delete-popup-bg {
+
+  /* display: flex; */
+  display: none;
+
   height: 100%;
   width: 100%;
   background: #00000052;
@@ -460,7 +559,7 @@ textarea:focus {
 
   justify-content: center;
   align-items: center;
-  
+
 }
 
 .popup {
@@ -481,43 +580,36 @@ textarea:focus {
 
 }
 
-.popup p{
+.popup p {
   font-size: 1.2rem;
   font-weight: 600;
   color: #3d3d3d;
 }
-.popup .p-btns{
+
+.popup .p-btns {
   display: flex;
   gap: 1rem;
 }
-.popup .p-btns button{
+
+.popup .p-btns button {
   padding: .5rem 1.2rem;
   font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
   border-radius: .3rem;
   border: 0px solid #ff00d9;
-  background:#a61bad;
+  background: #a61bad;
   min-width: 7rem;
-  transition: box-shadow .3s  ease-in;
+  transition: box-shadow .3s ease-in;
 }
 
 
-.popup .p-btns button.no-btn{
+.popup .p-btns button.no-btn {
   background-color: #fccaff;
   color: #820089;
 }
 
-.popup .p-btns button:hover{
+.popup .p-btns button:hover {
   box-shadow: 5px 5px 10px #ffc0f5;
   border: 1px solid #e31dff;
 }
-
-
-
-
-
-
-
-
-

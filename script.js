@@ -12,12 +12,40 @@ let tick = document.querySelectorAll(".task-done");
 let del = document.querySelectorAll(".delete-task");
 let i = 1;
 
+// title.addEventListener("click", () => {
+
+//     const sound = new Audio('/Assets/test.mp3');
+//     // sound.play();
+//     sound.autoplay = true;
+//     sound.loop = false;
+
+//     sound.play().catch(err => {
+//         console.log("Autoplay failed, user interaction needed:", err);
+//     });
+// })
+
 // Add task on clicking
 addTask.addEventListener("click", () => {
     if (title.value.trim() === "" && desc.value.trim() === "") {
-        alert("Pls add some Task to proceed...");
+        // const sound = new Audio('/Assets/warn alarm on empty field.mp3');
+        // // sound.play();
+        // sound.autoplay = true;
+        // sound.loop = false;
+        // sound.volume = .6;
+
+        // sound.play().catch(err => {
+        //     console.log("Autoplay failed, user interaction needed:", err);
+        // });
+
+        // setTimeout(() => {
+        //     sound.pause();
+        // }, 1800);
+        
         title.value = "";
         desc.value = "";
+        
+        alert("Pls add some Task to proceed...");
+
     }
 
     else {
@@ -80,9 +108,66 @@ addTask.addEventListener("click", () => {
         title.value = "";
         desc.value = "";
         i++;
+
+
     }
 
 })
+
+const micBtn = document.querySelector('.mic-btn');
+const taskTitleInput = document.getElementById('task-title');
+const taskDescInput = document.getElementById('task-desc');
+
+// Initialize speech recognition
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (!SpeechRecognition) {
+  alert('Sorry, your browser does not support Speech Recognition.');
+} else {
+  const recognition = new SpeechRecognition();
+  recognition.continuous = false;  // stops after one phrase
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;  // show live transcription (false for final result)
+  
+  let currentField = null;
+
+  // Track which input field is focused (input or textarea)
+  taskTitleInput.addEventListener('focus', () => {
+    currentField = 'task-title';
+  });
+  
+  taskDescInput.addEventListener('focus', () => {
+    currentField = 'task-desc';
+  });
+
+  // Start speech recognition when the mic button is clicked
+  micBtn.addEventListener('click', () => {
+    if (!currentField) {
+      alert('Please focus on the input or textarea field first.');
+      return;
+    }
+    micBtn.classList.add('listening');
+    recognition.start();
+  });
+
+  recognition.onresult = function(event) {
+    const transcript = event.results[0][0].transcript;
+    if (currentField === 'task-title') {
+      taskTitleInput.value = transcript;
+    } else if (currentField === 'task-desc') {
+      taskDescInput.value = transcript;
+    }
+  };
+
+  recognition.onend = function() {
+    micBtn.classList.remove('listening');
+  };
+
+  recognition.onerror = function(event) {
+    console.error('Speech recognition error:', event.error);
+    micBtn.classList.remove('listening');
+  };
+}
 
 
 // Popup for delete
